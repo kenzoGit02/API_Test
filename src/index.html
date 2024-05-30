@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html class="h-full bg-gray-300" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWT-Test</title>
+
+    <!-- STYLE -->
+    <link rel="stylesheet" href="./css/output.css">
+</head>
+<body class="h-full">
+  <!-- WHOLE PAGE WRAPPER -->
+  <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+
+    <!-- SIGN IN TEXT HEADER -->
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+      <h2 class="text-center text-2xl font-bold leading-9 tracking-tight to-blue-500">Sign in to continue</h2>
+    </div>
+
+    <!-- FORM WRAPPER -->
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+
+      <!-- FORM -->
+      <form class="space-y-6" id="form" method="post">
+
+        <!-- USERNAME -->
+        <div>
+          <label for="username" class="block text-sm font-medium leading-6 text-balance">Username</label>
+          
+          <!-- USERNAME INPUT -->
+          <div class="mt-2">
+            <input value="kenzo" id="username" name="username" type="text" autocomplete="username" required class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-black shadow-sm ring-1 ring-inset ring-black focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6">
+          </div>
+        </div>
+
+        <!-- PW -->
+        <div>
+          <div class="flex items-center justify-between">
+            <label for="password" class="block text-sm font-medium leading-6 text-black">Password</label>
+            <!-- FORGOT PASSWORD LINK -->
+            <div class="text-sm">
+              <a href="" class="font-semibold text-blue-500 hover:text-blue-400">Forgot password?</a>
+            </div>
+          </div>
+          <!-- PW INPUT -->
+          <div class="mt-2">
+            <input value="kenzo" id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-black shadow-sm ring-1 ring-inset ring-black focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6">
+          </div>
+        </div> 
+
+        <!-- SUBMIT BUTTON -->
+        <div>
+          <button type="submit" class="flex w-full justify-center rounded-md bg-blue-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue -500">Sign in</button>
+        </div>
+
+      </form>
+
+      <!-- REGISTRATION LINK -->
+      <p class="mt-10 text-center text-sm text-gray-400">
+        Not registered?
+        <a href="#" class="font-semibold leading-6 text-blue-500 hover:text-blue-400">Create an account here</a>
+      </p>
+
+    </div>
+  </div>
+</body>
+
+<!-- SCRIPT -->
+<script src="./js/script.js"></script>
+
+</html>
