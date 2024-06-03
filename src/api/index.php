@@ -45,10 +45,11 @@ $url = explode("/", $_SERVER["REQUEST_URI"]);
 
 $route = $url[4]; // Assigns the fifth segment of the URL to $route
 
-if ($route != "signup" && $route != "login") { //Restricts route to only login or signup
+if ($route != "user") { //Restricts route to only login or signup
     http_response_code(404);
     exit;
 }
+
 
 $id = $url[5] ?? null; //Checks if id has value
 

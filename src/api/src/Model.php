@@ -11,27 +11,49 @@ class Model{
 
     }
 
-    function signup(string $username, string $password): string
+    function create(string $username, string $password): string|false
     {
-        $randomBytes = random_bytes(32);
-
+        // $randomBytes = random_bytes(32);
         // Encode the bytes in base64 format
-        $base64Key = base64_encode($randomBytes);
+        // $base64Key = base64_encode($randomBytes);
 
-        // $sql = "INSERT INTO user (username, password)
-        // VALUES (:username, :password)";
+        $sql = "INSERT INTO user (username, password, secret_key)
+        VALUES (:username, :password ,:secret_key)";
         
-        // $stmt = $this->conn->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
 
-        // $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-        // $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+        $stmt->bindValue(':username', $username ?? " ", PDO::PARAM_STR);
+        $stmt->bindValue(':password', $password ?? " ", PDO::PARAM_STR);
+        $stmt->bindValue(':secret_key', $key ?? " ", PDO::PARAM_STR);
 
-        // $stmt->execute();
-        return $username . $password;
+        $stmt->execute();
+        
+        $result = $this->conn->lastInsertId();
+    
+        return $result ;
     }
 
-    function login(): string
+    function get(array $formData): array
     {
-        return "";
+        $sql = "SELECT * FROM user WHERE username = :username AND password = :password ";
+
+        $stmt = $this->conn->prepare($sql);
+
+        $stmt->bindValue(':username', $formData["username"], PDO::PARAM_STR);
+        $stmt->bindValue(':password', $formData["password"], PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        // $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    function update($formData): int
+    {
+        $sql = "UPDATE user
+                SET username = :username, password = :password
+                WHERE id = :id ";
+        $stmt = $this->conn->prepare($sql);
+        return 1;
     }
 }
