@@ -26,22 +26,39 @@ function loginUser(formData){
         },
         body: JSON.stringify(formData)
       })
-      
+
       .then(response => {
         if (!response.ok) {
-          return response.json();
+          throw new Error('Error response: ' + response.status);
         }
         return response.json();
       })
-      
       .then(data => {
-        console.log(data);
+        // console.log(data["hasRow"]);
+        if (data["hasRow"]){
+          // console.log(data["key"]);
+          localStorage.setItem('token', data["key"]);
+        } else {
+          console.log(data);
+        }
         // alert(data);
         // Handle successful response
       })
+
+      // .then(response => response.json())
+      // .then(data => {
+      //   if (!data.ok) {
+      //     // Handle error response
+      //     console.error('Error:', data);
+      //   } else {
+      //     // Handle successful response
+      //     console.log(data);
+      //     // alert(data);
+      //   }
+      // })
       
       .catch(error => {
-        console.error('Error:', error);
+        console.error('Catched Error:', error);
         // Handle errors
       });
 }

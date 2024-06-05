@@ -1,13 +1,16 @@
 <?php
 
+
 spl_autoload_register(fn($class) => require __DIR__ . "/src/$class.php");
 
 set_error_handler("ErrorHandler::handleError");
 set_exception_handler("ErrorHandler::handleException");
 
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: http://127.0.0.1:5500");
+// header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
 header("Access-Control-Allow-Methods: GET, POST , DELETE, PUT, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
 header("Content-type: application/json; charset=UTF-8");
 
 // Splits the request URI into an array of segments

@@ -98,6 +98,7 @@ class Controller {
                 $response["key"] = $encode;
 
                 echo json_encode($response);
+                // echo json_encode(["response" => $_SERVER['HTTP_ORIGIN']]);
 
                 http_response_code(200);
 
