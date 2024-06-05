@@ -1,8 +1,10 @@
+
 <?php
 use Firebase\JWT\JWT;
 use Firebase\JWT\KEY;
 use Firebase\JWT\ExpiredException;
 class Controller {
+    
     private $key = "CI6IkpXVCJ9";
 
     function __construct(private Model $Model)
@@ -63,7 +65,7 @@ class Controller {
     {
         switch($method){
 
-            case "GET":
+            case "POST":
                 $formData = (array)json_decode(file_get_contents("php://input"), true);
 
                 $result = $this->Model->get($formData);
@@ -79,7 +81,8 @@ class Controller {
 
                 $encode = JWT::encode($payload, $this->key, 'HS256');
 
-                $response = ["response" => "$encode"];
+                // $response = ["response" => "$encode"];
+                $response = ["response" => $result];
 
                 echo json_encode($response);
 
@@ -87,7 +90,7 @@ class Controller {
 
                 break;
 
-            case "POST":
+            case "GET":
                 $formData = (array)json_decode(file_get_contents("php://input"), true);
                     
                 $result = $this->Model->create($formData['username'],$formData['password']);

@@ -1,41 +1,41 @@
 <?php
 
+
+
+
+
+
+
 spl_autoload_register(fn($class) => require __DIR__ . "/src/$class.php");
 
 set_error_handler("ErrorHandler::handleError");
 set_exception_handler("ErrorHandler::handleException");
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST , DELETE, PUT, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Content-type: application/json; charset=UTF-8");
 
-require '../../vendor/autoload.php';
+
 
 use Firebase\JWT\JWT;
-use Firebase\JWT\KEY;
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
 
-$jwtSecret = $_ENV['JWT_SECRET'];
-// echo $jwtSecret;
-
-$payload = array(
+$payload = [
     'iss' => 'localhost', //issuer(who created and signed this token)
-    'aud' => 'localhost', //issuer(who created and signed this token)
     'iat' => time(),//issued at
     'exp' => strtotime("+1 hour"),//expiration time
-    'email' => "test@gmail.com",
-    'array' => array(
-        'test1' => "dummy data1",
-        'test2' => "dummy data2",
-        'test3' => "dummy data3"
-    )
-);
+];
 
-$encode = JWT::encode($payload, $jwtSecret, 'HS256');
+$encode = JWT::encode($payload, "CI6IkpXVCJ9", 'HS256');
+
+$response = ["response" => "$encode"];
+
+echo json_encode($response);
+
+return;
 
 
-// echo $encode;
-// print_r($decode);
 
 // Splits the request URI into an array of segments
 $url = explode("/", $_SERVER["REQUEST_URI"]);
