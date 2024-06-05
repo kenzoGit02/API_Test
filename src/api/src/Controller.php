@@ -1,8 +1,11 @@
-
 <?php
+
+require '../../vendor/autoload.php';
+
 use Firebase\JWT\JWT;
 use Firebase\JWT\KEY;
 use Firebase\JWT\ExpiredException;
+
 class Controller {
     
     private $key = "CI6IkpXVCJ9";
@@ -69,11 +72,21 @@ class Controller {
                 $formData = (array)json_decode(file_get_contents("php://input"), true);
 
                 $result = $this->Model->get($formData);
+                
+                $response = [];
+
+                if(!$result){
+                    $response = ["hasRow" => false];
+                    echo json_encode($response);
+                    break;
+                }
+
+                $response = ["hasRow" => true];
 
                 $id = $result["id"];
-
+                
                 $payload = [
-                    'iss' => 'localhost', //issuer(who created and signed this token)
+                    'iss' => 'kenzo', //issuer(who created and signed this token)
                     'iat' => time(),//issued at
                     'exp' => strtotime("+1 hour"),//expiration time
                     'id' => $id
@@ -81,8 +94,8 @@ class Controller {
 
                 $encode = JWT::encode($payload, $this->key, 'HS256');
 
-                // $response = ["response" => "$encode"];
-                $response = ["response" => $result];
+                $response["data"] = $result;
+                $response["key"] = $encode;
 
                 echo json_encode($response);
 

@@ -33,7 +33,7 @@ class Model{
         return $result ;
     }
 
-    function get(array $formData): array
+    function get(array $formData): array|bool
     {
         $sql = "SELECT * FROM user WHERE username = :username AND password = :password ";
 
@@ -45,7 +45,7 @@ class Model{
         $stmt->execute();
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        // $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
         return $result;
     }
     function update($formData): int

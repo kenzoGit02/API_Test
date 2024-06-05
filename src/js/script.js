@@ -22,7 +22,7 @@ function loginUser(formData){
   fetch('http://localhost/jwt-login/src/api/user', {
         method: 'POST',
         headers: {
-          'Accept': 'application/json'
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData)
       })
