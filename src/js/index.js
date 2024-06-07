@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-
+  
   const form = document.getElementById('form');
 
   form.addEventListener('submit', function(event) {
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       loginUser(data);
     
-      // location.href = "welcome.html";
+      
 
   });
 
@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
 function loginUser(formData){
   fetch('http://localhost/jwt-login/src/api/user', {
         method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-        },
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
         body: JSON.stringify(formData)
       })
 
@@ -34,31 +34,19 @@ function loginUser(formData){
         return response.json();
       })
       .then(data => {
-        // console.log(data["hasRow"]);
+        console.log(data);
         if (data["hasRow"]){
-          // console.log(data["key"]);
           localStorage.setItem('token', data["key"]);
+          alert("key stored");
+
+          location.href = "welcome.html";
+
         } else {
           console.log(data);
+          alert("Wrong Credentials");
         }
-        // alert(data);
-        // Handle successful response
       })
-
-      // .then(response => response.json())
-      // .then(data => {
-      //   if (!data.ok) {
-      //     // Handle error response
-      //     console.error('Error:', data);
-      //   } else {
-      //     // Handle successful response
-      //     console.log(data);
-      //     // alert(data);
-      //   }
-      // })
-      
       .catch(error => {
         console.error('Catched Error:', error);
-        // Handle errors
       });
 }

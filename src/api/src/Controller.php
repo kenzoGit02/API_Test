@@ -96,6 +96,7 @@ class Controller {
 
                 $response["data"] = $result;
                 $response["key"] = $encode;
+                $response["server"] = $_SERVER['HTTP_ORIGIN'];
 
                 echo json_encode($response);
                 // echo json_encode(["response" => $_SERVER['HTTP_ORIGIN']]);
@@ -125,6 +126,7 @@ class Controller {
                 http_response_code(200);
 
                 break;
+                
             default:
                 http_response_code(405);
                 header("Allow: GET, POST, PUT");
