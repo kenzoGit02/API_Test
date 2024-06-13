@@ -1,5 +1,8 @@
 <?php
 
+require "src/Router.php";
+header("Content-type: application/json; charset=UTF-8");
+return;
 
 spl_autoload_register(fn($class) => require __DIR__ . "/src/$class.php");
 
